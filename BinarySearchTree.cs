@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
-    class BinarySearchTree
+    class BinarySearchTree<T> where T:IComparable
     {
-        public Node rootNode;
-        public void Add(Node nodeToAdd)
+        public Node<T> rootNode;
+        public void Add(Node<T> nodeToAdd)
         {
             if (rootNode == null)
             {
@@ -18,11 +18,11 @@ namespace BinarySearchTree
             }
             else
             {
-                Node focusNode = rootNode;
+                Node<T> focusNode = rootNode;
                 while (true)
                 {
                     
-                    if(nodeToAdd.data<focusNode.data)
+                    if(nodeToAdd.data.CompareTo(focusNode.data)<0)
                     {
                         if (focusNode.leftNode == null)
                         {
@@ -52,7 +52,7 @@ namespace BinarySearchTree
             }
         }
 
-        public bool Search(Node nodeToFind)
+        public bool Search(Node<T> nodeToFind)
         {
             if (rootNode == null)
             {
@@ -60,19 +60,19 @@ namespace BinarySearchTree
             }
             else
             {
-                Node focusNode=rootNode;
+                Node<T> focusNode=rootNode;
 
                 while (true)
                 {
-                    if (nodeToFind.data == focusNode.data)
+                    if (nodeToFind.data.CompareTo(focusNode.data)==0)
                     {
                         return true;
                     }
-                    else if (nodeToFind.data < focusNode.data&&focusNode.leftNode!=null)
+                    else if (nodeToFind.data.CompareTo(focusNode.data)<0&&focusNode.leftNode!=null)
                     {
                         focusNode = focusNode.leftNode;
                     }
-                    else if (nodeToFind.data > focusNode.data && focusNode.rightNode != null)
+                    else if (nodeToFind.data.CompareTo(focusNode.data)>0 && focusNode.rightNode != null)
                     {
                         focusNode = focusNode.rightNode;
                     }
@@ -83,6 +83,10 @@ namespace BinarySearchTree
                 }
             }
 
+        }
+        public int CompareTo(T other)
+        {
+            return other.CompareTo(this);
         }
 
     }

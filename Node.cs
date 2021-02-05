@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
-    class Node
+    class Node<T>
     {
-        public int data;
-        public Node leftNode;
-        public Node rightNode;
+        public T data;
+        public Node<T> leftNode;
+        public Node<T> rightNode;
 
-        public Node(int data)
+        public Node(T data)
         {
             this.data = data;
         }
