@@ -7,20 +7,82 @@ using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
-    public class BinarySearchTree<T>: IEnumerable where T: IComparable
+    class BinarySearchTree
     {
-        private T[] items = new T[4];
-        private int count;
-        public BinarySearchTree()
+        public Node rootNode;
+        public void Add(Node nodeToAdd)
         {
-
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            for (int i = 0; i < count; i++)
+            if (rootNode == null)
             {
-                yield return items[i];
+                rootNode = nodeToAdd;
             }
+            else
+            {
+                Node focusNode = rootNode;
+                while (true)
+                {
+                    
+                    if(nodeToAdd.data<focusNode.data)
+                    {
+                        if (focusNode.leftNode == null)
+                        {
+                            focusNode.leftNode = nodeToAdd;
+                            break;
+                        }
+                        else
+                        {
+                            focusNode = focusNode.leftNode;
+                        }
+                    }
+                    else
+                    {
+                        if (focusNode.rightNode == null)
+                        {
+                            focusNode.rightNode = nodeToAdd;
+                            break;
+                        }
+                        else
+                        {
+                            focusNode = focusNode.rightNode;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        public bool Search(Node nodeToFind)
+        {
+            if (rootNode == null)
+            {
+                return false;
+            }
+            else
+            {
+                Node focusNode=rootNode;
+
+                while (true)
+                {
+                    if (nodeToFind.data == focusNode.data)
+                    {
+                        return true;
+                    }
+                    else if (nodeToFind.data < focusNode.data&&focusNode.leftNode!=null)
+                    {
+                        focusNode = focusNode.leftNode;
+                    }
+                    else if (nodeToFind.data > focusNode.data && focusNode.rightNode != null)
+                    {
+                        focusNode = focusNode.rightNode;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
         }
 
     }
