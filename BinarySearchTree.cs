@@ -61,7 +61,7 @@ namespace BinarySearchTree
             else
             {
                 Node<T> focusNode=rootNode;
-
+                
                 while (true)
                 {
                     if (nodeToFind.data.CompareTo(focusNode.data)==0)
